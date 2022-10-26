@@ -83,7 +83,8 @@ public interface HardwareAdapter{
     public static final String kMainThirdRightAuto = "4MainThirdBallAutoRight";
     public static final String kMainFourRightAuto = "4MainFourBallAutoRight";
     }
-   
+
+    //Controller
     public interface ControllerInputs {
       public static final double driver_rightY = xbox.getRightY();
       public static final double driver_rightX = xbox.getRightX();
@@ -117,7 +118,7 @@ public interface HardwareAdapter{
     }
 	// Gear Ratios  
 	// Diameters   
-    //Camera
+    // Camera
     // Robot dimensions
     // Pneumatics
     // Analog Inputs
