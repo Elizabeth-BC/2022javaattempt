@@ -1,9 +1,10 @@
-package frc.robot.commands.auto;
+package frc.robot.commands.auto.routines;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.RobotContainer;
 
-public class DoNothingAuto extends CommandBase {
-  public DoNothingAuto() {
+public class kMainFourRightAuto extends CommandBase {
+  public kMainFourRightAuto() {
   }
 
   @Override
@@ -12,6 +13,7 @@ public class DoNothingAuto extends CommandBase {
 
   @Override
   public void execute() {
+    RobotContainer.at.readFile();
   }
 
   @Override

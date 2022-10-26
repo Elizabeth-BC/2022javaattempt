@@ -15,7 +15,6 @@ public class Auto extends SubsystemBase implements HardwareAdapter.ControllerInp
   private ObjectOutputStream cmdWrite;
   private String basePath = "/home/lvuser/";
 
-
   public Auto() {
 
   }
@@ -33,12 +32,12 @@ public class Auto extends SubsystemBase implements HardwareAdapter.ControllerInp
   }
 
   public ControllerInputs readFile() {
-    Debug.debugCons("Reading auto file...");
+    // Debug.debugCons("Reading auto file...");
     ControllerInputs inputs = null;
     try {
       inputs = (ControllerInputs) cmdRead.readObject();
     } catch (IOException err) {
-      Debug.debugCons("Error reading auto file: " + err.toString());
+      Debug.debugCons("Error reading auto file: " + err.toString());      
     } catch (ClassNotFoundException cerr) {
       Debug.debugCons("Could not read controller inputs object from auto file: " + cerr.toString());
     }

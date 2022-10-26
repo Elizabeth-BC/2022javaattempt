@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 // import frc.robot.HardwareAdapter.ControllerInputs;
 // import frc.robot.subsystems.Auto;
 
-
 public class Robot extends TimedRobot implements HardwareAdapter.ControllerInputs{
   private Command autoCommand;  
   private RobotContainer robotContainer;
@@ -33,7 +32,7 @@ public class Robot extends TimedRobot implements HardwareAdapter.ControllerInput
   }
 
   @Override
-  public void autonomousInit() {
+  public void autonomousInit() {    
     autoCommand = robotContainer.getAutonomousCommand();
     if (autoCommand != null) {
       autoCommand.schedule();

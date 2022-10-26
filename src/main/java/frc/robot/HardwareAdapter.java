@@ -74,6 +74,7 @@ public interface HardwareAdapter{
     public interface AutoConstants {
     public static final boolean WRITE = true;
     public static final boolean READ = false;
+    public static final boolean autoFinished = true;
     public static final String kLeftAuto = "2BallAutoLeft.aut";
     public static final String kCenterAuto = "3BallAutoCenter.aut";
     public static final String kRightAuto = "4BallAutoRight";

@@ -5,14 +5,25 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
+
 import frc.libs.SmoothXboxController;
-import frc.robot.commands.auto.DoNothingAuto;
+
+import frc.robot.commands.auto.routines.DoNothingAuto;
+import frc.robot.commands.auto.routines.kCenterAuto;
+import frc.robot.commands.auto.routines.kLeftAuto;
+import frc.robot.commands.auto.routines.kMainFourRightAuto;
+import frc.robot.commands.auto.routines.kMainOneRightAuto;
+import frc.robot.commands.auto.routines.kMainRightAuto;
+import frc.robot.commands.auto.routines.kMainThirdRightAuto;
+import frc.robot.commands.auto.routines.kMainTwoRightAuto;
+import frc.robot.commands.auto.routines.kRightAuto;
+
 import frc.robot.commands.drivetrain.TimedDrive;
 import frc.robot.commands.drivetrain.Drive;
 import frc.robot.commands.drivetrain.LeftTimedTurn;
 import frc.robot.commands.drivetrain.RightTimedTurn;
+
 import frc.robot.subsystems.Auto;
-// import frc.robot.subsystems.Controller;
 import frc.robot.subsystems.Drivetrain;
 
 
@@ -31,14 +42,14 @@ public class RobotContainer implements HardwareAdapter{
   public RobotContainer() {
 
     chooser.setDefaultOption("Do Nothing Auto", new DoNothingAuto());
-    // chooser.addOption("2BallAutoLeft", new kLeftAuto());
-    // chooser.addOption("3BallAutoCenter", new kCenterAuto(0.25, 2));
-    // chooser.addOption("4BallAutoRight", new kRightAuto());
-    // chooser.addOption("4MainBallAutoRight", new kMainRightAuto());
-    // chooser.addOption("4MainOneBallAutoRight", new kMainOneRightAuto());
-    // chooser.addOption("4MainTwoBallAutoRight", new kMainTwoRightAuto());
-    // chooser.addOption("4MainThirdBallAutoRight", new kMainThirdRightAuto());
-    // chooser.addOption("4MainFourBallAutoRight", new kMainFourRightAuto());
+    chooser.addOption("2BallAutoLeft", new kLeftAuto());
+    chooser.addOption("3BallAutoCenter", new kCenterAuto()); //0.25, 2
+    chooser.addOption("4BallAutoRight", new kRightAuto());
+    chooser.addOption("4MainBallAutoRight", new kMainRightAuto());
+    chooser.addOption("4MainOneBallAutoRight", new kMainOneRightAuto());
+    chooser.addOption("4MainTwoBallAutoRight", new kMainTwoRightAuto());
+    chooser.addOption("4MainThirdBallAutoRight", new kMainThirdRightAuto());
+    chooser.addOption("4MainFourBallAutoRight", new kMainFourRightAuto());
     
     Shuffleboard.getTab("Selector").add(chooser);
 
