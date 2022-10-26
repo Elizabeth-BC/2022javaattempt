@@ -1,13 +1,16 @@
 package frc.robot;
 
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.UsbCamera;
+
 import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 
 import frc.libs.SmoothXboxController;
-
 import frc.robot.commands.auto.routines.DoNothingAuto;
 import frc.robot.commands.auto.routines.kCenterAuto;
 import frc.robot.commands.auto.routines.kLeftAuto;
@@ -17,7 +20,7 @@ import frc.robot.commands.auto.routines.kMainRightAuto;
 import frc.robot.commands.auto.routines.kMainThirdRightAuto;
 import frc.robot.commands.auto.routines.kMainTwoRightAuto;
 import frc.robot.commands.auto.routines.kRightAuto;
-
+import frc.robot.commands.limelight.LightOn;
 import frc.robot.commands.drivetrain.TimedDrive;
 import frc.robot.commands.drivetrain.Drive;
 import frc.robot.commands.drivetrain.LeftTimedTurn;
@@ -33,13 +36,18 @@ public class RobotContainer implements HardwareAdapter{
   // public static final Controller ci = new Controller();
 
 
-  private static final SendableChooser<Command> chooser = new SendableChooser<>();
+  public static final SendableChooser<Command> chooser = new SendableChooser<>();
 
   // Controllers
   public static final SmoothXboxController xbox = new SmoothXboxController(xboxPrimaryDriver);
   public static final SmoothXboxController xbox2 = new SmoothXboxController(xboxSecondaryDriver);
 
+  private UsbCamera camera;
+
   public RobotContainer() {
+    camera = CameraServer.startAutomaticCapture();
+    camera.setFPS(FPS);
+    camera.setResolution(RES_X, RES_Y);
 
     chooser.setDefaultOption("Do Nothing Auto", new DoNothingAuto());
     chooser.addOption("2BallAutoLeft", new kLeftAuto());
@@ -53,6 +61,9 @@ public class RobotContainer implements HardwareAdapter{
     
     Shuffleboard.getTab("Selector").add(chooser);
 
+    SmartDashboard.putNumber("LimelightX", x);
+    SmartDashboard.putNumber("LimelightY", y);
+    SmartDashboard.putNumber("LimelightArea", area);
     
     configureButtonBindings();
     configureDefaultCommands();
@@ -67,6 +78,9 @@ public class RobotContainer implements HardwareAdapter{
 
     new JoystickButton(xbox, Button.kY.value)
     .whenPressed(new RightTimedTurn(0.25, 2));
+
+    new JoystickButton(xbox, Button.kB.value)
+    .whenPressed(new LightOn());
   }
 
   private void configureDefaultCommands() {

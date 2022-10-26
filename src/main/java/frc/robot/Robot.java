@@ -3,10 +3,9 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-// import frc.robot.HardwareAdapter.ControllerInputs;
-// import frc.robot.subsystems.Auto;
+import frc.robot.subsystems.Auto;
 
-public class Robot extends TimedRobot implements HardwareAdapter.ControllerInputs{
+public class Robot extends TimedRobot implements HardwareAdapter{
   private Command autoCommand;  
   private RobotContainer robotContainer;
   private boolean m_recordMode = true;
@@ -14,6 +13,7 @@ public class Robot extends TimedRobot implements HardwareAdapter.ControllerInput
   @Override
   public void robotInit() {    
     robotContainer = new RobotContainer();
+    ChangeLEDColors(LEDS_LOCKED_ON);
   }
 
   @Override
@@ -53,11 +53,12 @@ public class Robot extends TimedRobot implements HardwareAdapter.ControllerInput
 
   @Override
   public void teleopPeriodic() {
-    
+
   }
 
   @Override
   public void testInit() {
+    Auto.setupRecording(chooser.getSelected());
     if (m_recordMode) {
       teleopPeriodic();
       // Auto.record(ControllerInputs inputs);
@@ -65,5 +66,9 @@ public class Robot extends TimedRobot implements HardwareAdapter.ControllerInput
   }
   @Override
   public void testPeriodic() {
+  }
+
+  public void ChangeLEDColors(double SetColor) {
+    BlinkinLEDDriver.set(SetColor);
   }
 }

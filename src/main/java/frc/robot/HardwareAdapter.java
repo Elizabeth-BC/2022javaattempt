@@ -6,8 +6,13 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import frc.libs.SmoothXboxController;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.PowerDistribution;
 
 
@@ -37,6 +42,31 @@ public interface HardwareAdapter{
     
     // PDP/PCM/VRM
     public static final PowerDistribution pdp = new PowerDistribution();
+    
+    //Limelight
+    // public static final double distanceFromLimeLightToGoalInches;
+    // public static final double horizontalAngleToTarget;
+    // public static final double angleForPivot;
+    public static final NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+    public static final NetworkTableEntry ledMode = table.getEntry("ledMode");
+    public static final NetworkTableEntry tx = table.getEntry("tx");
+    public static final NetworkTableEntry ty = table.getEntry("ty");
+    public static final NetworkTableEntry ta = table.getEntry("ta");
+    public static final double x = tx.getDouble(0.0);
+    public static final double y = ty.getDouble(0.0);
+    public static final double area = ta.getDouble(0.0);
+    public static final double limelightMountAngleDegrees = 35.0;
+    public static final double limelightLensHeightInches = 36.5;
+    public static final double goalHeightInches = 104.0;
+    public static final double TARGET_RANGE = 4.0;
+    public static final int LL_ON = 3;
+    public static final int LL_OFF = 1;
+
+    //Camera
+    static final int FPS = 30;
+    static final int BRIGHTNESS = 40;
+    static final int RES_X = 256;
+    static final int RES_Y = 114;
 
     //LEDs
     public static final Spark BlinkinLEDDriver = new Spark(0);
@@ -71,6 +101,7 @@ public interface HardwareAdapter{
     public static final AHRS navx = new AHRS(SPI.Port.kMXP);
     
     //Auto
+    public static final SendableChooser<Command> chooser = new SendableChooser<>();
     public interface AutoConstants {
     public static final boolean WRITE = true;
     public static final boolean READ = false;
@@ -119,7 +150,6 @@ public interface HardwareAdapter{
     }
 	// Gear Ratios  
 	// Diameters   
-    // Camera
     // Robot dimensions
     // Pneumatics
     // Analog Inputs

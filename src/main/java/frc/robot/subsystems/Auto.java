@@ -2,24 +2,25 @@ package frc.robot.subsystems;
 
 import java.io.*;
 
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.HardwareAdapter;
 import frc.robot.HardwareAdapter.ControllerInputs;
 
 public class Auto extends SubsystemBase implements HardwareAdapter.ControllerInputs{
 
-  private File cmdFile;
+  private static File cmdFile;
   private FileInputStream fReader;
   private ObjectInputStream cmdRead;
-  private FileOutputStream fWriter;
-  private ObjectOutputStream cmdWrite;
-  private String basePath = "/home/lvuser/";
+  private static FileOutputStream fWriter;
+  private static ObjectOutputStream cmdWrite;
+  private static String basePath = "/home/lvuser/";
 
   public Auto() {
 
   }
 
-  public void setupPlayback(String inputFileName) {
+  public void setupPlayback(Command inputFileName) {
     String filePath = basePath + inputFileName + ".aut";
     Debug.debugCons("Reading auto instructions from " + filePath);
     cmdFile = new File(filePath);
@@ -44,8 +45,7 @@ public class Auto extends SubsystemBase implements HardwareAdapter.ControllerInp
     return inputs;
   }
 
-  // Done in Test part of Robot
-  public void setupRecording(String inputFileName) {
+  public static void setupRecording(Command inputFileName) {
     String filePath = basePath + inputFileName + ".aut";
     Debug.debugCons("Reading auto instructions from " + filePath);
     cmdFile = new File(filePath);
