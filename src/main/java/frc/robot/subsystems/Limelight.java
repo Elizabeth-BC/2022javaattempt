@@ -2,12 +2,12 @@ package frc.robot.subsystems;
 
 import frc.robot.HardwareAdapter;
 
-class Limelight implements HardwareAdapter{
+public class Limelight implements HardwareAdapter{
   double distanceFromLimeLightToGoalInches;
   double horizontalAngleToTarget;
   double angleForPivot;
 
-  Limelight() {
+  public Limelight() {
 
   }
 

@@ -27,13 +27,27 @@ import frc.robot.commands.drivetrain.LeftTimedTurn;
 import frc.robot.commands.drivetrain.RightTimedTurn;
 
 import frc.robot.subsystems.Auto;
+import frc.robot.subsystems.Climb;
+import frc.robot.subsystems.Debug;
 import frc.robot.subsystems.Drivetrain;
-
+import frc.robot.subsystems.Feeder;
+import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Limelight;
+import frc.robot.subsystems.Pivot;
+import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Turret;
 
 public class RobotContainer implements HardwareAdapter{
-  public static final Drivetrain dt = new Drivetrain();
   public static final Auto at = new Auto();
-  // public static final Controller ci = new Controller();
+  public static final Climb cl = new Climb();
+  public static final Debug db = new Debug();
+  public static final Drivetrain dt = new Drivetrain();
+  public static final Feeder fd = new Feeder();
+  public static final Intake in = new Intake();
+  public static final Limelight ll = new Limelight();
+  public static final Pivot pv = new Pivot();
+  public static final Shooter sh = new Shooter();
+  public static final Turret tr = new Turret();
 
 
   public static final SendableChooser<Command> chooser = new SendableChooser<>();

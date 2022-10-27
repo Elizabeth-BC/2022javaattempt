@@ -1,5 +1,6 @@
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax;
@@ -63,10 +64,10 @@ public interface HardwareAdapter{
     public static final int LL_OFF = 1;
 
     //Camera
-    static final int FPS = 30;
-    static final int BRIGHTNESS = 40;
-    static final int RES_X = 256;
-    static final int RES_Y = 114;
+    public static final int FPS = 30;
+    public static final int BRIGHTNESS = 40;
+    public static final int RES_X = 256;
+    public static final int RES_Y = 114;
 
     //LEDs
     public static final Spark BlinkinLEDDriver = new Spark(0);
@@ -90,7 +91,39 @@ public interface HardwareAdapter{
     public final static double driveRegular = 0.7;
     public final static double driveSlow = 0.4;
     public final static double driveRampTime = 5.0;
+
+    //Climber
+    public final CANSparkMax climb1 = new CANSparkMax(14, MotorType.kBrushless);
+    public final CANSparkMax climb2 = new CANSparkMax(13, MotorType.kBrushless);
+    public final CANSparkMax climbHigh = new CANSparkMax(16, MotorType.kBrushless);
+    public final MotorControllerGroup climbMotors = new MotorControllerGroup(climb1,climb2);
+
+    public static final double CLIMB_SPEED = 1.0;
+    public static final double CLIMB_SPEED2 = -1.0;
+    public static final double CLIMBHIGH_SPEED = 1.0;
+
+    //Feeder
+    public final WPI_TalonSRX mainFeederMotor = new WPI_TalonSRX(11);
+    public final WPI_TalonSRX upperFeederMotor = new WPI_TalonSRX(10);
+
+    public static final double mainFeederPowerIn = -0.8;
+    public static final double mainFeederPowerOut = 0.8;
+    public static final double upperFeederPowerIn = -0.9;
+
+    //Intake
+    public final WPI_TalonSRX intakeMotor = new WPI_TalonSRX(7);
+    public final CANSparkMax intakePivot = new CANSparkMax(15, MotorType.kBrushless);
+
+    public static final double intakePowerIn = 0.8;
+    public static final double intakePivotPowerIn = 0.6;
+    public static final double intakePivotPowerOut = -0.6;
+
+    //Pivot
+
+    //Shooter
     
+    //Turret
+
     // Encoders
     public static final RelativeEncoder leftEncoder1 =  (leftMotor1.getEncoder());
     public static final RelativeEncoder leftEncoder2 =  (leftMotor2.getEncoder());
