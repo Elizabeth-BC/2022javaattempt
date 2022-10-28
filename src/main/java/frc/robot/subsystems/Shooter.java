@@ -17,20 +17,23 @@ public class Shooter extends SubsystemBase implements HardwareAdapter{
 
 
     // pidControllerShooterOne = flyWheelUpperOne.getPIDController();
+
     pidControllerShooterOne.setP(shooter_kP);
     pidControllerShooterOne.setI(shooter_kI);
     pidControllerShooterOne.setD(kD);
+    
     // pidControllerShooterOne.setIZone(kIz);
     // pidControllerShooterOne.setFF(kFF);
     // pidControllerShooterOne.setOutputRange(kMinOutput, kMaxOutput);
 
     // pidControllerShooterTwo = flyWheelUpperTwo.getPIDController();
-    pidControllerShooterTwo.setP(shooter_kP);
-    pidControllerShooterTwo.setI(shooter_kI);
-    pidControllerShooterTwo.setD(kD);
-    pidControllerShooterTwo.setIZone(kIz);
-    pidControllerShooterTwo.setFF(kFF);
-    pidControllerShooterTwo.setOutputRange(kMinOutput, kMaxOutput);
+
+    // pidControllerShooterTwo.setP(shooter_kP);
+    // pidControllerShooterTwo.setI(shooter_kI);
+    // pidControllerShooterTwo.setD(kD);
+    // pidControllerShooterTwo.setIZone(kIz);
+    // pidControllerShooterTwo.setFF(kFF);
+    // pidControllerShooterTwo.setOutputRange(kMinOutput, kMaxOutput);
   }
 
   void stopShooter() {
