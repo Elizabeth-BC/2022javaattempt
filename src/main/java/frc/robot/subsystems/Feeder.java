@@ -1,37 +1,23 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.HardwareAdapter;
 
-public class Feeder {
+public class Feeder extends SubsystemBase implements HardwareAdapter{
   
   public Feeder() {
 
   }
 
-  void runFeeder() {
-    m_feederMotor.set(FEEDER_POWER_IN);
+  public void runFeeder() {
+    mainFeederMotor.set(mainFeederPowerIn);
   }
 
-  void reverseFeeder() {
-    m_feederMotor.set(FEEDER_POWER_OUT);
+  public void reverseFeeder() {
+    mainFeederMotor.set(mainFeederPowerOut);
   }
 
-  void stopFeeder() {
-    m_feederMotor.stopMotor();
-  }
-}
-
-class UpperFeeder {
-
-  UpperFeeder() {
-    m_upperfeederMotor.clearStickyFaults();
-  }
-
-  void runUpperFeeder() {
-    m_upperfeederMotor.set(UPPER_FEEDER_POWER_IN);
-  }
-
-  void stopUpperFeeder() {
-    m_upperfeederMotor.stopMotor();
+  public void stopFeeder() {
+    mainFeederMotor.stopMotor();
   }
 }

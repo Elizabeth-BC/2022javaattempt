@@ -26,10 +26,10 @@ public class Drivetrain extends SubsystemBase implements HardwareAdapter{
     dt.tankDrive(leftSpeed, rightSpeed, false); 
   }
 
-  public void timedTurn(TurnMode mode, double throttle) {
-		if (mode == TurnMode.Left) tankDrive(-throttle, throttle);
-		if (mode == TurnMode.Right) tankDrive(throttle, -throttle);
-	}
+  // public void timedTurn(TurnMode mode, double throttle) {
+	// 	if (mode == TurnMode.Left) tankDrive(-throttle, throttle);
+	// 	if (mode == TurnMode.Right) tankDrive(throttle, -throttle);
+	// }
 
   public void Stop() {
     dt.stopMotor();

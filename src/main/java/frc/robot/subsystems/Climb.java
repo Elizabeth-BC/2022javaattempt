@@ -1,39 +1,35 @@
 package frc.robot.subsystems;
 
-import com.revrobotics.CANSparkMax;
-
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.HardwareAdapter;
 
-public class Climb implements HardwareAdapter{
+public class Climb extends SubsystemBase implements HardwareAdapter{
 
   public Climb() {
 
   }
 
-  void ClimbUp() {
-    climbLead.set(CLIMB_SPEED2);
-    climbFollower.set(CLIMB_SPEED2);
+  public void ClimbUp() {
+    climbMotors.set(climbSpeed2);
   }
 
-  void ClimbDown() {
-    climbLead.set(CLIMB_SPEED);
-    climbFollower.set(CLIMB_SPEED);
+  public void ClimbDown() {
+    climbMotors.set(climbSpeed);
   }
 
-  void ClimbStop() {
-    climbLead.stopMotor();
-    climbFollower.stopMotor();
+  public void ClimbStop() {
+    climbMotors.stopMotor();
   }
 
-  void ClimbHighUP() {
-    climbHigh.set(-CLIMB_SPEED);
+  public void ClimbHighUP() {
+    climbHigh.set(-climbSpeed);
   }
 
-  void ClimbHighDOWN() {
-    climbHigh.set(CLIMBHIGH_SPEED);
+  public void ClimbHighDOWN() {
+    climbHigh.set(climbHighSpeed);
   }
 
-  void ClimbHighStop() {
+  public void ClimbHighStop() {
     climbHigh.stopMotor();
   }
 }

@@ -3,6 +3,7 @@ package frc.robot;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
@@ -11,9 +12,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import frc.libs.SmoothXboxController;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.AnalogEncoder;
 import edu.wpi.first.wpilibj.PowerDistribution;
 
 
@@ -33,6 +36,8 @@ public interface HardwareAdapter{
     public final static double kD = 0;
     public final static double kIz = 0;
     public final static double kFF = 0.000015;
+    public static final double shooter_kP = 6e-5;
+    public static final double shooter_kI = 1e-6;
     
     //OI
     public static final double STICK_DEADBAND = 0.15;
@@ -98,9 +103,9 @@ public interface HardwareAdapter{
     public final CANSparkMax climbHigh = new CANSparkMax(16, MotorType.kBrushless);
     public final MotorControllerGroup climbMotors = new MotorControllerGroup(climb1,climb2);
 
-    public static final double CLIMB_SPEED = 1.0;
-    public static final double CLIMB_SPEED2 = -1.0;
-    public static final double CLIMBHIGH_SPEED = 1.0;
+    public static final double climbSpeed = 1.0;
+    public static final double climbSpeed2 = -1.0;
+    public static final double climbHighSpeed = 1.0;
 
     //Feeder
     public final WPI_TalonSRX mainFeederMotor = new WPI_TalonSRX(11);
@@ -119,17 +124,55 @@ public interface HardwareAdapter{
     public static final double intakePivotPowerOut = -0.6;
 
     //Pivot
-
-    //Shooter
+    public static final WPI_TalonSRX pivotMotor = new WPI_TalonSRX(8);
+    public static final PIDController pivotPID = new PIDController(placeholder, placeholder, placeholder);
     
+    public static final double kMaxPivotPower = 0.15;  //max pivot turn power 2 percent
+    public static final double kMaxPivotCorrectPower = 0.15;  //correct when turret goes beyond max range
+    public static final double kMaxRange = 30.0;
+    public static final double kEncoderRatio = 73.17;
+    public static final double kNominalTXError = 1.0;
+    public static final int minPivotAngle = 0;
+    public static final int maxPivotAngle = 58700;
+    
+    //Shooter
+    public final CANSparkMax flyWheelUpperOne = new CANSparkMax(5, MotorType.kBrushless);
+    public final CANSparkMax flyWheelUpperTwo = new CANSparkMax(6, MotorType.kBrushless);
+
+    public static final PIDController pidControllerShooterOne = new PIDController(placeholder, placeholder, placeholder);
+    // public static final PIDController pidControllerShooterTwo = new PIDController(placeholder, placeholder, placeholder);
+
+
+    static final double kMaxShOutput = 1.0;
+    static final double kMinShOutput = -1.0;
+    static final double manualRPM = 4000;
+    static final double MaxRPM = 5676;
+    static final double rearShooterPercent = 0.6;
+    static final double shooterSlope = 11.9;
+    static final double shooterConst = 2215; // previously 2190
+    static final double extraRPM = 25.0;
+
     //Turret
+    public final WPI_TalonSRX turretMotor = new WPI_TalonSRX(12);
+
+    public static final double[] goalAngle = {0.01, 90.0, 180.0, 270.0, 359.9};
+    public static final double angleThresh = 8.0;
+    public static final double kTurretPower = 0.4;               //normal turn power
+    public static final double kTurretAutoPower = 0.3;           //autotargeting turn power
+    public static final double kMaxTurretPower = 0.5;            //max turret turn power
+    public static final double kMAX_RANGE = 180.0;
+    public static final double kENCODER_RATIO = 73.17;
 
     // Encoders
     public static final RelativeEncoder leftEncoder1 =  (leftMotor1.getEncoder());
     public static final RelativeEncoder leftEncoder2 =  (leftMotor2.getEncoder());
     public static final RelativeEncoder rightEncoder1 = (rightMotor1.getEncoder());
     public static final RelativeEncoder rightEncoder2 = (rightMotor2.getEncoder());
-    
+    public static final RelativeEncoder encoderShooterOne = (flyWheelUpperOne.getEncoder());
+    public static final RelativeEncoder encoderShooterTwo = (flyWheelUpperTwo.getEncoder());
+    public static final AnalogEncoder pivotEncoder = new AnalogEncoder(1);
+    public static final AnalogEncoder turretEncoder = new AnalogEncoder(0);
+
     // Gyro
     public static final AHRS navx = new AHRS(SPI.Port.kMXP);
     
